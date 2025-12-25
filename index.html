@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>김정윤 | 프론트엔드 포트폴리오</title>
+    <!-- 공통 CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- 홈 전용 CSS -->
+    <link rel="stylesheet" href="css/home.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- 헤더 컴포넌트 로드 -->
+    <div data-include="header.html"></div>
+
+    <!-- 1. Hero Section -->
+    <section class="hero-section">
+        <div class="hero-bg-shape shape-1"></div>
+        <div class="hero-bg-shape shape-2"></div>
+
+        <div class="hero-content">
+            <span class="hero-subtitle">Frontend Developer</span>
+            <h1 class="hero-title">사용자 경험을 디자인하는<br>개발자 김정윤입니다.</h1>
+            <p class="hero-desc">
+                단순한 코드가 아닌, 사람의 마음을 움직이는 인터페이스를 만듭니다.
+                웹 표준과 접근성을 준수하며, 최적의 성능을 고민합니다.
+            </p>
+            <div class="hero-btns">
+                <a href="projects.html" class="btn">프로젝트 보기</a>
+                <a href="about.html" class="btn" style="background:transparent; border:2px solid var(--text-color); color:var(--text-color); margin-left:10px;">더 알아보기</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. About Preview -->
+    <section class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Who I Am</h2>
+            <div class="preview-card">
+                <i class="fas fa-user-astronaut preview-icon"></i>
+                <h3>끊임없이 탐구하는 개발자</h3>
+                <p style="margin: 20px 0;">
+                    3년간의 프론트엔드 개발 경험을 통해, 문제를 정의하고 해결하는 과정을 즐기게 되었습니다.
+                    새로운 기술 스택을 두려워하지 않으며, 팀과의 소통을 최우선으로 생각합니다.
+                </p>
+                <a href="about.html" style="color: var(--accent-color); font-weight: 700;">자세히 보기 &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Projects Preview -->
+    <section class="section-padding" style="background-color: var(--surface-color);">
+        <div class="container">
+            <h2 class="section-title">Featured Work</h2>
+            <!-- 간략한 그리드 (Projects.html의 축소판) -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+                <!-- Preview Item 1 -->
+                <article class="preview-card" style="padding:0; overflow:hidden; text-align:left;">
+                    <img src="https://placehold.co/600x400?text=Project+1" alt="프로젝트1" style="width:100%; height:200px; object-fit:cover;">
+                    <div style="padding: 25px;">
+                        <h4>쇼핑몰 리뉴얼 프로젝트</h4>
+                        <p style="font-size:0.9rem; color:var(--text-light); margin:10px 0;">React 기반의 SPA 쇼핑몰. 성능 최적화와 결제 모듈 연동.</p>
+                        <a href="project-detail.html" style="font-size:0.9rem; font-weight:600;">케이스 스터디 보기</a>
+                    </div>
+                </article>
+                
+                <!-- Preview Item 2 -->
+                <article class="preview-card" style="padding:0; overflow:hidden; text-align:left;">
+                    <img src="https://placehold.co/600x400?text=Project+2" alt="프로젝트2" style="width:100%; height:200px; object-fit:cover;">
+                    <div style="padding: 25px;">
+                        <h4>기업형 대시보드</h4>
+                        <p style="font-size:0.9rem; color:var(--text-light); margin:10px 0;">복잡한 데이터를 시각화(Chart.js)하여 의사결정을 돕는 어드민.</p>
+                        <a href="project-detail.html" style="font-size:0.9rem; font-weight:600;">케이스 스터디 보기</a>
+                    </div>
+                </article>
+            </div>
+            
+            <div style="text-align:center; margin-top:50px;">
+                <a href="projects.html" class="btn">전체 프로젝트 보기</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 컴포넌트 로드 -->
+    <div data-include="footer.html"></div>
+
+    <!-- JS -->
+    <script src="js/include.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

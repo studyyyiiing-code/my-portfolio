@@ -1,0 +1,72 @@
+<footer class="main-footer">
+    <div class="container footer-content">
+        <div class="footer-left">
+            <h3>My<span>Log</span>.</h3>
+            <p>오늘의 기록이 내일의 성장이 됩니다.</p>
+        </div>
+        
+        <div class="footer-social">
+            <a href="#" aria-label="Github"><i class="fab fa-github"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 Kim Jeong Yoon. All rights reserved.</p>
+    </div>
+
+    <style>
+        .main-footer {
+            background-color: var(--surface-color);
+            padding: 60px 0 20px;
+            margin-top: 100px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        
+        .footer-left h3 { font-size: 1.5rem; margin-bottom: 10px; }
+        .footer-left h3 span { color: var(--primary-color); }
+        .footer-left p { color: var(--text-light); }
+        
+        .footer-social { display: flex; gap: 20px; }
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--bg-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+        .footer-social a:hover {
+            background-color: var(--primary-color);
+            color: #333;
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 30px;
+            }
+        }
+    </style>
+</footer>

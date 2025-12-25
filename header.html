@@ -1,0 +1,110 @@
+<header class="main-header">
+    <div class="logo">
+        <a href="index.html">My<span>Log</span>.</a>
+    </div>
+
+    <!-- 네비게이션 -->
+    <nav>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">홈</a></li>
+            <li><a href="about.html">소개</a></li>
+            <li><a href="projects.html">프로젝트</a></li>
+            <li><a href="gallery.html">갤러리</a></li>
+            <li><a href="contact.html">컨택트</a></li>
+        </ul>
+    </nav>
+
+    <!-- 우측 컨트롤 (테마 토글 + 모바일 메뉴) -->
+    <div class="header-controls">
+        <button id="theme-toggle" class="icon-btn" aria-label="테마 변경">
+            <i class="fas fa-moon"></i>
+        </button>
+        <div class="menu-toggle" id="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+
+    <!-- 헤더 전용 CSS (Shadow DOM을 쓰지 않으므로 스코프 관리를 위해 클래스 활용) -->
+    <style>
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
+            padding: 0 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--bg-color); /* 테마 반응형 */
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: background-color 0.3s ease;
+        }
+
+        .logo a {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-color);
+        }
+        .logo span { color: var(--accent-color); }
+
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { 
+            color: var(--text-color); 
+            font-weight: 500;
+            position: relative;
+        }
+        .nav-links a:hover { color: var(--accent-color); }
+        
+        /* 링크 밑줄 애니메이션 */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            bottom: -5px;
+            left: 0;
+            transition: 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        .header-controls { display: flex; align-items: center; gap: 20px; }
+        
+        .icon-btn {
+            background: none;
+            font-size: 1.2rem;
+            color: var(--text-color);
+            padding: 5px;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+        .icon-btn:hover { color: var(--accent-color); transform: rotate(15deg); }
+
+        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; color: var(--text-color); }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .main-header { padding: 0 20px; }
+            .menu-toggle { display: block; }
+            
+            .nav-links {
+                position: fixed;
+                top: var(--header-height);
+                right: -100%;
+                width: 100%;
+                height: calc(100vh - var(--header-height));
+                background-color: var(--bg-color);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: 0.4s ease-in-out;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            }
+            .nav-links.active { right: 0; }
+            .nav-links a { font-size: 1.5rem; }
+        }
+    </style>
+</header>

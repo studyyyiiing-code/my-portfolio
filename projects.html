@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | 김정윤</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 필터 버튼 스타일 */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 25px;
+            border: 2px solid var(--border-color);
+            background: var(--surface-color);
+            border-radius: 30px;
+            color: var(--text-color);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #333;
+        }
+
+        /* 프로젝트 그리드 */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--surface-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        /* 필터링 애니메이션 클래스 */
+        .project-card.hide {
+            display: none;
+        }
+
+        .card-img {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .card-img img {
+            transform: scale(1.1);
+        }
+
+        .card-body {
+            padding: 25px;
+        }
+
+        .card-tag {
+            display: inline-block;
+            background: var(--bg-color);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-bottom: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .card-desc {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .card-link {
+            color: var(--accent-color);
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div data-include="header.html"></div>
+
+    <section class="section-padding" style="margin-top: 60px;">
+        <div class="container">
+            <h2 class="section-title">My Projects</h2>
+            
+            <!-- Filter Buttons -->
+            <div class="filter-container">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="web">Web App</button>
+                <button class="filter-btn" data-filter="mobile">Mobile</button>
+                <button class="filter-btn" data-filter="ai">AI / Data</button>
+            </div>
+
+            <!-- Grid -->
+            <div class="projects-grid" id="projects-grid">
+                
+                <!-- Project 1 (Web) -->
+                <article class="project-card" data-category="web">
+                    <div class="card-img">
+                        <img src="https://placehold.co/600x400?text=E-Commerce" alt="이커머스">
+                    </div>
+                    <div class="card-body">
+                        <span class="card-tag">Web App</span>
+                        <h3 class="card-title">패션 이커머스 플랫폼</h3>
+                        <p class="card-desc">React와 Redux를 활용하여 장바구니 및 결제 기능을 구현한 반응형 쇼핑몰입니다.</p>
+                        <a href="project-detail.html" class="card-link">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Project 2 (Mobile) -->
+                <article class="project-card" data-category="mobile">
+                    <div class="card-img">
+                        <img src="https://placehold.co/600x400?text=Travel+App" alt="여행앱">
+                    </div>
+                    <div class="card-body">
+                        <span class="card-tag">Mobile</span>
+                        <h3 class="card-title">여행 일정 관리 앱</h3>
+                        <p class="card-desc">PWA로 제작되어 앱 설치 없이 네이티브 경험을 제공하는 여행 플래너입니다.</p>
+                        <a href="project-detail.html" class="card-link">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Project 3 (AI) -->
+                <article class="project-card" data-category="ai">
+                    <div class="card-img">
+                        <img src="https://placehold.co/600x400?text=Dashboard" alt="대시보드">
+                    </div>
+                    <div class="card-body">
+                        <span class="card-tag">AI / Data</span>
+                        <h3 class="card-title">매출 예측 대시보드</h3>
+                        <p class="card-desc">파이썬 데이터 분석 결과를 Chart.js로 시각화한 기업용 어드민 페이지입니다.</p>
+                        <a href="project-detail.html" class="card-link">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Project 4 (Web) -->
+                <article class="project-card" data-category="web">
+                    <div class="card-img">
+                        <img src="https://placehold.co/600x400?text=Portfolio" alt="포트폴리오">
+                    </div>
+                    <div class="card-body">
+                        <span class="card-tag">Web App</span>
+                        <h3 class="card-title">개인 포트폴리오 v1</h3>
+                        <p class="card-desc">HTML/CSS/JS 만을 사용하여 제작한 인터랙티브한 개인 웹사이트입니다.</p>
+                        <a href="project-detail.html" class="card-link">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <div data-include="footer.html"></div>
+
+    <script src="js/include.js"></script>
+    <script src="js/main.js"></script>
+    
+    <!-- 필터링 스크립트 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const projects = document.querySelectorAll('.project-card');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // 1. 버튼 활성화 상태 변경
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    const filterValue = btn.getAttribute('data-filter');
+
+                    // 2. 프로젝트 필터링
+                    projects.forEach(project => {
+                        if (filterValue === 'all' || project.getAttribute('data-category') === filterValue) {
+                            project.classList.remove('hide');
+                            // 애니메이션 효과를 위해 잠시 투명도 조절 등을 할 수 있음
+                        } else {
+                            project.classList.add('hide');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
