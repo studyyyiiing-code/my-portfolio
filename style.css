@@ -1,0 +1,142 @@
+/**
+ * main.js
+ * 전역 설정: 다크모드, 모바일 메뉴, 그리고 '관리자 수정 모드'
+ */
+
+document.addEventListener('componentsLoaded', () => {
+    initTheme();
+    initMobileMenu();
+    highlightActiveLink();
+    initEditMode(); // 수정 모드 초기화
+});
+
+// 1. 다크 모드 초기화 및 토글
+function initTheme() {
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const icon = themeToggleBtn ? themeToggleBtn.querySelector('i') : null;
+    
+    if (!themeToggleBtn) return;
+
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+        document.body.setAttribute('data-theme', 'dark');
+        if(icon) { icon.classList.remove('fa-moon'); icon.classList.add('fa-sun'); }
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+        const currentTheme = document.body.getAttribute('data-theme');
+        if (currentTheme === 'dark') {
+            document.body.setAttribute('data-theme', 'light');
+            localStorage.setItem('theme', 'light');
+            if(icon) { icon.classList.remove('fa-sun'); icon.classList.add('fa-moon'); }
+        } else {
+            document.body.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            if(icon) { icon.classList.remove('fa-moon'); icon.classList.add('fa-sun'); }
+        }
+    });
+}
+
+// 2. 모바일 메뉴 토글
+function initMobileMenu() {
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const navLinks = document.getElementById('nav-links');
+
+    if (mobileMenuBtn && navLinks) {
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    }
+}
+
+// 3. 현재 페이지 네비게이션 하이라이트
+function highlightActiveLink() {
+    const currentPath = window.location.pathname;
+    const links = document.querySelectorAll('.nav-links a');
+    
+    links.forEach(link => {
+        const href = link.getAttribute('href');
+        if (currentPath.includes(href) || (currentPath.endsWith('/') && href === 'index.html')) {
+            link.classList.add('active-link');
+            // 스타일은 CSS에서 제어하거나 여기서 직접 주입
+            link.style.color = 'var(--primary-color)';
+            link.style.fontWeight = '700';
+        }
+    });
+}
+
+// ==========================================
+// 4. ⭐ [핵심 기능] 관리자 수정 모드 (Edit Mode)
+// ==========================================
+function initEditMode() {
+    // 편집 모드 상태 표시기 생성
+    const indicator = document.createElement('div');
+    indicator.id = 'edit-mode-indicator';
+    indicator.innerHTML = '<i class="fas fa-pen"></i> 편집 모드 ON <br><small style="font-weight:400; font-size:0.8rem;">(저장하려면 F8)</small>';
+    document.body.appendChild(indicator);
+
+    let isEditing = false;
+
+    // F9 키: 편집 모드 토글
+    // F8 키: 현재 HTML 다운로드 (저장 시뮬레이션)
+    document.addEventListener('keydown', (e) => {
+        
+        // F9: 편집 모드 켜기/끄기
+        if (e.key === 'F9') {
+            isEditing = !isEditing;
+            document.body.contentEditable = isEditing;
+            document.designMode = isEditing ? 'on' : 'off';
+            
+            if (isEditing) {
+                indicator.style.display = 'block';
+                alert('✏️ [편집 모드 시작]\n텍스트와 이미지를 클릭해서 수정하세요.\n\n주의: 새로고침하면 사라집니다.\n저장하려면 F8을 누르세요.');
+            } else {
+                indicator.style.display = 'none';
+            }
+        }
+
+        // F8: 변경된 HTML 다운로드
+        if (e.key === 'F8' && isEditing) {
+            e.preventDefault();
+            downloadHTML();
+        }
+    });
+}
+
+// HTML 파일 다운로드 함수
+function downloadHTML() {
+    // 1. 편집 모드 UI 숨기기 (저장 파일에 포함되지 않게)
+    const indicator = document.getElementById('edit-mode-indicator');
+    if(indicator) indicator.remove();
+    document.body.contentEditable = 'false';
+
+    // 2. 현재 HTML 내용 가져오기
+    const htmlContent = `<!DOCTYPE html>\n<html lang="ko">\n${document.documentElement.innerHTML}\n</html>`;
+
+    // 3. Blob 생성 및 다운로드 링크 트리거
+    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    
+    // 현재 파일명으로 저장 (예: index.html)
+    let fileName = window.location.pathname.split('/').pop();
+    if (!fileName) fileName = 'index.html';
+    
+    a.download = fileName;
+    a.click();
+
+    // 4. UI 복구
+    document.body.appendChild(indicator);
+    document.body.contentEditable = 'true';
+    alert(`💾 ${fileName} 파일이 다운로드 되었습니다.\n\n다운로드된 파일을 프로젝트 폴더에 덮어쓰면 영구적으로 저장됩니다.`);
+}
